@@ -1,0 +1,205 @@
+/* ============================================================
+   Core Financiero — Caja Municipal de Ahorro y Crédito Arequipa
+   Paleta institucional: azul marino #003087 · naranja #FF6B00
+   ============================================================ */
+.home {
+  --azul:     #003087;
+  --azul-dk:  #001f5c;
+  --azul-md:  #0055b3;
+  --naranja:  #FF6B00;
+  --naranja-dk: #cc5500;
+  --dorado:   #FFB300;
+  --celeste:  #0099cc;
+  --verde:    #16a34a;
+  --rojo-err: #dc2626;
+
+  --home-text: #1a2340;
+  --home-soft: #5a6a8a;
+
+  /* Franja institucional azul-naranja */
+  --franja: repeating-linear-gradient(
+    90deg,
+    var(--azul)    0   18px,
+    var(--naranja) 18px 28px,
+    var(--azul)    28px 46px,
+    var(--dorado)  46px 54px,
+    var(--azul)    54px 72px,
+    var(--naranja) 72px 82px,
+    var(--azul)    82px 100px
+  );
+
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--home-text);
+  background: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.home__franja { height: 8px; background: var(--franja); }
+
+/* ---------- Header ---------- */
+.home-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 32px;
+  background: #fff;
+  border-bottom: 1px solid #dce5f0;
+}
+.home-header__chip {
+  background: #e6edf7;
+  color: var(--azul);
+  font-weight: 700;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+.home-footer-bar {
+  flex: 0 0 auto;
+  background: #1a2340;
+  color: #a8b8d8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px 32px;
+  font-size: 12.5px;
+}
+.home-footer-bar a { color: #fff; text-decoration: none; }
+.home-footer-bar a:hover { text-decoration: underline; }
+
+/* ---------- Split layout ---------- */
+.home-split { display: flex; flex: 1; align-items: stretch; min-height: 0; }
+.split-info {
+  flex: 1 1 50%; min-width: 0; min-height: 0; overflow: hidden;
+  display: flex;
+  animation: splitInLeft 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+.split-login {
+  flex: 1 1 50%; min-width: 0; overflow: hidden; position: relative;
+  display: flex; color: #fff;
+  background: linear-gradient(150deg, var(--azul-dk) 0%, var(--azul) 50%, var(--naranja) 100%);
+  background-size: 180% 180%;
+  animation: splitInRight 0.7s cubic-bezier(0.22,1,0.36,1) both,
+             lpShift 18s ease 0.7s infinite;
+}
+
+/* Decoración geométrica en lugar de flor (estilo financiero/corporativo) */
+.split-login__deco {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.06);
+}
+.split-login__deco--1 { width: 500px; height: 500px; left: -160px; bottom: -180px; }
+.split-login__deco--2 { width: 280px; height: 280px; right: -80px; top: -80px; }
+.split-login__deco--3 { width: 150px; height: 150px; right: 60px; bottom: 80px; background: rgba(255,107,0,.15); }
+
+@keyframes splitInLeft  { from { opacity:0; transform:translateX(-30px); } }
+@keyframes splitInRight { from { opacity:0; transform:translateX(30px); } }
+@keyframes lpShift {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+.split-login::before {
+  content:'';
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(130% 80% at 85% -10%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(110% 70% at -10% 110%, rgba(0,0,0,.20), transparent 55%);
+}
+.split-login__inner {
+  position:relative; z-index:1; width:100%; max-width:420px;
+  margin:auto; display:flex; flex-direction:column;
+  padding:44px 40px; box-sizing:border-box;
+  animation: lpInnerUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.35s both;
+}
+@keyframes lpInnerUp { from { opacity:0; transform:translateY(18px); } }
+
+.split-login__secure {
+  display:inline-flex; align-items:center; gap:7px; align-self:flex-start;
+  background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.25);
+  border-radius:999px; padding:5px 12px; font-size:11.5px; font-weight:700;
+  letter-spacing:.3px; margin:22px 0 16px;
+}
+.split-login h2 { margin:6px 0 4px; font-size:32px; letter-spacing:-.5px; }
+.split-login__sub { margin:0 0 26px; opacity:.9; font-size:14px; }
+
+/* Campos del panel de login */
+.lp-field { display:flex; flex-direction:column; gap:7px; margin-bottom:16px; }
+.lp-field label { font-size:13px; font-weight:600; opacity:.95; }
+.lp-input { position:relative; display:flex; align-items:center; }
+.lp-input__icon { position:absolute; left:14px; color:#9aa3b2; pointer-events:none; }
+.lp-input input {
+  width:100%; padding:13px 14px 13px 42px; border-radius:11px;
+  border:1.5px solid transparent; font-size:14px;
+  background:#fff; color:#1a2340; box-sizing:border-box;
+  transition:border-color .15s, box-shadow .15s;
+}
+.lp-input input:focus { outline:none; border-color:#fff; box-shadow:0 0 0 4px rgba(255,255,255,.30); }
+
+.lp-row { display:flex; align-items:center; justify-content:space-between; font-size:13px; margin-bottom:18px; }
+.lp-row label { display:flex; align-items:center; gap:7px; cursor:pointer; }
+.lp-link { background:none; border:none; color:#fff; text-decoration:underline; cursor:pointer; font-size:13px; padding:0; }
+.lp-hint { background:rgba(255,255,255,.18); border-radius:8px; padding:10px 12px; font-size:12.5px; margin-bottom:14px; }
+.lp-error { background:rgba(0,0,0,.22); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:14px; }
+
+.btn-login {
+  width:100%; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  background:#fff; color:var(--azul); border:none; padding:14px; border-radius:11px;
+  font-size:15px; font-weight:800; cursor:pointer;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);
+  transition:transform .15s, box-shadow .15s;
+}
+.btn-login:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 12px 26px rgba(0,0,0,.26); }
+.btn-login:disabled { opacity:.7; cursor:not-allowed; }
+
+/* ---------- Carrusel ---------- */
+.carrusel { position:relative; border-radius:20px; overflow:hidden; box-shadow:0 16px 40px rgba(0,48,135,.18); max-width:1000px; margin:0 auto; }
+.carrusel--fill { flex:1; align-self:stretch; min-height:0; max-width:none; margin:0; border-radius:0; box-shadow:none; }
+.carrusel--fill .carrusel__track  { height:100%; }
+.carrusel--fill .carrusel__slide  { height:100%; min-height:0; }
+.carrusel--fill .carrusel__content { max-width:84%; padding:0 60px; gap:14px; }
+.carrusel--fill .carrusel__title  { font-size:46px; line-height:1.08; }
+.carrusel--fill .carrusel__sub    { font-size:18px; max-width:560px; }
+.carrusel--fill .carrusel__badge  { font-size:12.5px; padding:6px 14px; }
+
+.carrusel__chips { display:flex; flex-wrap:wrap; gap:9px; margin-top:8px; }
+.carrusel__chip  { background:rgba(255,255,255,.92); color:#1a2340; border-radius:999px; padding:7px 15px; font-weight:700; font-size:13.5px; }
+.carrusel__track  { display:flex; transition:transform .55s cubic-bezier(.4,0,.2,1); }
+.carrusel__slide  { position:relative; min-width:100%; height:300px; }
+.carrusel__svg    { position:absolute; inset:0; width:100%; height:100%; display:block; }
+.carrusel__content { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; gap:8px; padding:0 48px; max-width:62%; color:#fff; }
+.carrusel__badge  { align-self:flex-start; background:rgba(255,255,255,.95); color:var(--azul); font-weight:800; font-size:11px; letter-spacing:.6px; padding:5px 12px; border-radius:999px; text-transform:uppercase; }
+.carrusel__title  { font-size:30px; line-height:1.12; margin:0; font-weight:800; text-shadow:0 2px 8px rgba(0,0,0,.25); }
+.carrusel__sub    { font-size:16px; margin:0; opacity:.95; text-shadow:0 1px 4px rgba(0,0,0,.25); }
+.carrusel__arrow  { position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:50%; border:none; background:rgba(255,255,255,.85); color:var(--home-text); display:grid; place-items:center; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,.2); }
+.carrusel__arrow:hover { background:#fff; }
+.carrusel__arrow--prev { left:14px; }
+.carrusel__arrow--next { right:14px; }
+.carrusel__dots  { position:absolute; bottom:14px; left:0; right:0; display:flex; justify-content:center; gap:8px; }
+.carrusel__dot   { width:10px; height:10px; border-radius:50%; border:none; background:rgba(255,255,255,.55); cursor:pointer; padding:0; }
+.carrusel__dot.active { background:#fff; width:26px; border-radius:6px; }
+
+/* ---------- Reveal ---------- */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
+.reveal--in { opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce) { .reveal { opacity:1; transform:none; transition:none; } }
+
+@media (max-width:900px) {
+  .home-split { flex-direction:column; }
+  .split-login { flex:0 0 auto; padding:48px 0; }
+  .split-info  { flex:0 0 auto; }
+  .carrusel--fill { height:440px; }
+  .carrusel__content { max-width:100%; padding:0 28px; }
+  .carrusel__title { font-size:28px; }
+}
+@media (max-width:720px) {
+  .carrusel__content { max-width:100%; padding:0 24px; }
+  .carrusel__title   { font-size:22px; }
+}
